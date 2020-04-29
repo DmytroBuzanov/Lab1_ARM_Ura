@@ -1,0 +1,79 @@
+		MOV		R7, #8
+		MOV		R8, #3
+		MOV		R2, R7
+		MOV		R3, R8
+		
+		bl		mul
+		MOV		R10, R0
+		
+		SUB		R2, R7, #1
+		MOV		R3, R8
+		bl		mul
+		MOV		R12, R0
+		
+		
+		MOV		R2, #2
+		ADD		R3, R8, R2
+		MOV		R2, R7
+		bl		mul
+		MOV		R11, R0
+		LSL		R11, R11, #1
+		ADD		R11, R11, R0
+		MOV		R1, #140
+		SUB		R11, R11, R1
+		CMP		R11, #0
+		BLE		module
+		
+f2		MOV		R1, #0
+		ADD		R1, R10, R11
+		ADD		R1, R1, R12
+		
+		end		; result stored in R1
+		;		in R10, R11, R12 stored terms
+		
+		
+module	MOV		R0, #0
+		SUB		R11, R0, R11
+		b		f2
+		
+		
+mul		MOV		R0, #0
+		MOV		R4, #0
+		MOV		R5, #0
+		MOV		R6, #0
+		SUB		R3, R3, #17
+		CMP		R2, #0
+		BEQ		zero
+		CMP		R3, #0
+		BEQ		zero
+		CMP		R2, R0
+		BCS		aaa
+		MOV		R6, #1
+		
+aaa		CMP		R3, R0
+		BCS		bbb
+		MOV		R5, #1
+		AND		R4, R6, R5
+		
+bbb		MOV		R0, R3
+cont		cmp		R2, #1
+		bne		contmul
+		
+		CMP		R4, #1
+		BEQ		exit
+		ORR		R4, R5, R6
+		CMP		R4, #0
+		BEQ		exit
+		MOV		R2, #0
+		SUB		R0, R2, R0
+exit		MOV		PC, LR
+		
+contmul	ADD		R0, R0, R3
+		SUB		R2, R2, #1
+		B		cont
+		
+zero		MOV		R0, #0
+		MOV		PC, LR
+		
+		
+		
