@@ -1,0 +1,48 @@
+cnst r7, 8
+cnst r8, 3
+mov r2, r7
+mov r3, r8
+mov r2, r7
+mov r3, r8
+cnst r14, 17
+sub r3, r3, r14
+mul r0, r2, r3
+mov r10, r0
+mov r2, r7
+mov r3, r8
+cnst r6, 1
+sub r2,r2,r6
+sub r3, r3, r14
+mul r0,r2,r3
+mov r12, r0
+
+cnst r2, 2
+add r3, r8, r2
+mov r2, r7
+sub r3, r3, r14
+mul r0, r2, r3
+mov r11, r0
+cnst r15, 3
+mul r11, r11, r15
+cnst r1, 140
+sub r11,r11,r1
+mov r11, r11
+
+
+cnst r2, 0
+cmp r2, r11, r2
+cnst r3, :modul
+cnst r0, 0
+jmpsml r2, r3
+add r1, r10,r11
+add r1,r1,r12
+
+
+:modul
+
+sub r11, r0, r11
+mov r11, r11
+cnst r1, 0
+add r1, r10,r11
+add r1,r1,r12
+mov r1, r1
